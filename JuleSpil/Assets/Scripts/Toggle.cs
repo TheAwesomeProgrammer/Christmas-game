@@ -19,9 +19,13 @@ public class Toggle : MonoBehaviour {
         switch (id)
         {
             case 0 :
-                GetComponent<Detonator>().Explode();
-                Destroy(transform.FindChild("BOX").gameObject);
-                Destroy(gameObject, GetComponent<Detonator>().duration);
+                if (GetComponent<Detonator>() != null)
+                {
+                    Debug.Log("Detonating");
+                    GetComponent<Detonator>().Explode();
+                    Destroy(transform.FindChild("BOX").gameObject);
+                    Destroy(gameObject, GetComponent<Detonator>().duration);
+                }
             break;
         }
     }
