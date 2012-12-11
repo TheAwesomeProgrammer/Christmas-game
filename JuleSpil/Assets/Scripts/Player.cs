@@ -192,6 +192,21 @@ public class Player : AttackScript {
         {
             takeDamage(100);
         }
+        Debug.Log("hit name : " + hit.collider.name);
+        if (hit.collider.name == "Glow")
+        {
+            takeDamage(100);
+        }
+        if (hit.collider.tag == "FallingIceCube")
+        {
+            FallingIceCubes tfallingIceCube = hit.collider.GetComponent<FallingIceCubes>();
+            if (tfallingIceCube.whenToFall == float.MaxValue)
+            {
+                tfallingIceCube.whenToFall = Time.time + tfallingIceCube.touchDelay;
+            }
+        
+          
+        }
         if (hit.collider.tag == "Latter")
         {
             isLatter = true;

@@ -6,13 +6,14 @@ public class Handle : MonoBehaviour
     public int id;
     public Material toggleOff;
     public Material toggleOn;
-    private bool hasTogggled = false;
+    public bool hasTogggled { get; set; }
     private int toggle = -1;
+   
 
     // Use this for initialization
     void Start()
     {
-
+        hasTogggled = false;
     }
 
     // Update is called once per frame

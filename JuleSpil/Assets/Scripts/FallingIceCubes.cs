@@ -9,10 +9,11 @@ public class FallingIceCubes : MonoBehaviour {
 
     private float speed;
 
-    private float whenToFall = float.MaxValue;
+    public float whenToFall { get; set; }
 
 	// Use this for initialization
 	void Start () {
+        whenToFall = float.MaxValue;
         speed = 0;
 	}
 	
@@ -20,6 +21,7 @@ public class FallingIceCubes : MonoBehaviour {
 	void Update () {
         if (whenToFall <= Time.time)
         {
+            GetComponent<BoxCollider>().isTrigger = true;
             if (speed < MAXSPEED)
             {
                 speed += accSpeed;
@@ -33,7 +35,7 @@ public class FallingIceCubes : MonoBehaviour {
         Debug.Log("Colliding tag : " + collidingObject.tag);
         if (collidingObject.tag == "Player")
         {
-            whenToFall = Time.time + touchDelay;
+           
         }
     }
 }
