@@ -28,6 +28,7 @@ public class Handle : MonoBehaviour
             renderer.material = toggleOn;
             if (!hasTogggled)
             {
+               
                 toggleId(id);
                 hasTogggled = true;
             }
@@ -57,6 +58,7 @@ public class Handle : MonoBehaviour
             Toggle tToggle = gameObjToLookThrough.GetComponent<Toggle>();
             if (tToggle.id == id)
             {
+            
                 tToggle.toggleId(id);
             }
         }

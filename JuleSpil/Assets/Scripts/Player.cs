@@ -36,8 +36,9 @@ public class Player : AttackScript {
 
     private Transform healthBar;
 
-    private GameObject target;
+    private Enemy target;
     private GameObject[] mtarget;
+ 
 
     private float startJumping;
     private float lastLife;
@@ -66,7 +67,9 @@ public class Player : AttackScript {
        
         if (mtarget.Length > 0)
         {
-            findTarget();
+           
+            mEnemy =  findTarget("Enemy").GetComponent<Enemy>();
+            target = mEnemy;
             distanceFromTarget = Vector3.Distance(target.transform.position, transform.position);
           
                 attack(); 
@@ -90,11 +93,11 @@ public class Player : AttackScript {
         
     
 
-    public void findTarget()
+    public GameObject findTarget(string tag)
     {
         float minX = float.MaxValue;
         GameObject tempTarget = null;
-        foreach (GameObject targetTemp in mtarget)
+        foreach (GameObject targetTemp in GameObject.FindGameObjectsWithTag(tag))
         {
             float tempDistance = Vector2.Distance(transform.position, targetTemp.transform.position);
             if (tempDistance < minX)
@@ -105,8 +108,8 @@ public class Player : AttackScript {
 
         }
 
-        target = tempTarget;
-        mEnemy = tempTarget.GetComponent<Enemy>();
+        return tempTarget;
+    
     
 }
 
@@ -151,7 +154,7 @@ public class Player : AttackScript {
        if(!isLatter)
        {
            moveDirection = new Vector3(horizontalMovement*speed * Time.deltaTime, 0, 0);
-           
+           Debug.Log("Movement latter : " + horizontalMovement * speed * Time.deltaTime);
        }
      
         moveDirection = transform.TransformDirection(moveDirection);
@@ -181,7 +184,11 @@ public class Player : AttackScript {
          if(isLatter)
          {
              moveDirection.y = 0;
-             moveDirection = new Vector3(horizontalMovement * speed*Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
+             
+             moveDirection = new Vector3(horizontalMovement * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
+
+             moveDirection = transform.TransformDirection(moveDirection);
+             moveDirection *= speed;
        }
         controller.Move(moveDirection * Time.deltaTime);
     }
@@ -221,6 +228,7 @@ public class Player : AttackScript {
         {
             if (nextAttack <= Time.time)
             {
+               
                 nextAttack = Time.time + attackIntervalHeavy;
                 mAnimation.shouldAnimate = animationEnum.secoundAnimation;
                 if (distanceFromTarget < attackRange)

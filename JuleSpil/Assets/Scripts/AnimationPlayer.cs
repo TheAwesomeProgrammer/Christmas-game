@@ -16,10 +16,11 @@ public class AnimationPlayer : MonoBehaviour
     public Material hitAnimationOnePlayer;
     public Material hitAnimationTwoPlayer;
 
-    public GameObject player;
 
     public float howLongShouldAnimateLight;
     public float howLongShouldAnimateHeavy;
+
+    public bool mIsAnimating { get; set; }
 
     public animationEnum shouldAnimate { get; set; }
 
@@ -34,6 +35,7 @@ public class AnimationPlayer : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+        
 	    shouldAnimate = animationEnum.noAnimation;
 	}
 	
@@ -42,22 +44,25 @@ public class AnimationPlayer : MonoBehaviour
 	{
         if(whenToStopAnimating < Time.time)
         {
+            mIsAnimating = false;
             whenToStopAnimating = float.MaxValue;
-            player.renderer.material = normalAnimation;
+            renderer.material = normalAnimation;
         }
       
          if(shouldAnimate == animationEnum.secoundAnimation)
         {
+            mIsAnimating = true;
             whenToStopAnimating = howLongShouldAnimateHeavy + Time.time;
             shouldAnimate = animationEnum.noAnimation;
-            player.renderer.material = hitAnimationTwoPlayer;
+            renderer.material = hitAnimationTwoPlayer;
         }
 
         if (shouldAnimate == animationEnum.firstAnimation)
         {
+            mIsAnimating = true;
             whenToStopAnimating = howLongShouldAnimateLight + Time.time;
             shouldAnimate = animationEnum.noAnimation;
-            player.renderer.material = hitAnimationOnePlayer;
+            renderer.material = hitAnimationOnePlayer;
         }
 	   
 	}

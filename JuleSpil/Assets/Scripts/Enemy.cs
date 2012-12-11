@@ -38,13 +38,14 @@ public class Enemy : MonoBehaviour
         drawLifeAndRage = GameObject.Find("DrawLifeAndRage").GetComponent<DrawLifeAndRage>();
 	    life = MAXLIFE;
 	    lastLife = 0;
-	    player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+	    
        
 	}
 	
 	// Update is called once per frame
 	 public void  Update ()
 	{
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         distanceFromTarget = Vector2.Distance(player.transform.position, transform.position);
          if(renderer.isVisible)
          {
@@ -114,7 +115,7 @@ public class Enemy : MonoBehaviour
                player.rage += 5;
            }
            
-           player.findTarget();
+           player.findTarget("Enemy");
            Destroy(gameObject);
        }
    }
@@ -144,12 +145,17 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, lookRange);
     }
 
+ 
 
-    void OnTriggerStay()
+    void OnTriggerStay(Collider collisionObject)
     {
+        if (collisionObject.tag == "FallingIceCube")
+        {
+            takeDamage(100);
+        }
+
         if (player.speed > (player.MAXSPEED - mHowMuchToSlowPlayer))
         {
-
             player.speed -= mHowMuchToSlowPlayer;
         }
     }

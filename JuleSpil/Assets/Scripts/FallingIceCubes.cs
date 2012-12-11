@@ -21,21 +21,22 @@ public class FallingIceCubes : MonoBehaviour {
 	void Update () {
         if (whenToFall <= Time.time)
         {
-            GetComponent<BoxCollider>().isTrigger = true;
+         
             if (speed < MAXSPEED)
             {
                 speed += accSpeed;
             }
+            rigidbody.isKinematic = false;
             rigidbody.velocity = new Vector2(0, -speed);
         }
 	}
 
-    void OnTriggerEnter(Collider collidingObject)
+    void OnCollisionEnter(Collision collidingObject)
     {
-        Debug.Log("Colliding tag : " + collidingObject.tag);
-        if (collidingObject.tag == "Player")
+        if (collidingObject.collider.tag != "IceWall")
         {
-           
+            Destroy(gameObject);
         }
+      
     }
 }
