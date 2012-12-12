@@ -67,14 +67,11 @@ public class Player : AttackScript {
        
         if (mtarget.Length > 0)
         {
-           
             mEnemy =  findTarget("Enemy").GetComponent<Enemy>();
             target = mEnemy;
             distanceFromTarget = Vector3.Distance(target.transform.position, transform.position);
-          
-                attack(); 
-
         }
+        attack(); 
         move();
             isDead();
  
@@ -213,6 +210,10 @@ public class Player : AttackScript {
             }
         
           
+        }
+        if (hit.collider.tag == "NormalBox" && GetComponent<AnimationPlayer>().mIsAnimating)
+        {
+            Destroy(hit.collider.gameObject);
         }
         if (hit.collider.tag == "Latter")
         {

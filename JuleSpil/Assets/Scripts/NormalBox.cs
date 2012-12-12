@@ -19,7 +19,6 @@ public class NormalBox : MonoBehaviour {
         if (collidingObject.collider.tag == "Player" && collidingObject.collider.GetComponent<AnimationPlayer>().mIsAnimating)
         {
             Destroy(gameObject);
-
         }
     }
 }
