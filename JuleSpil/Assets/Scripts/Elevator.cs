@@ -28,7 +28,7 @@ public class Elevator : MonoBehaviour
         }
         if (Application.loadedLevelName == "level3")
         {
-            endVector = new Vector3(-8.251297f, -38.74735f, -8.067272f);
+            endVector = new Vector3(17.46829f, -51.78516f, -2.689121f);
         }
        
 	    playerIsOnElevator = false;
@@ -55,8 +55,16 @@ public class Elevator : MonoBehaviour
     if(shouldOperate)
     {
         shouldSignOperate = true;
-       
+        if (Application.loadedLevelName == "level1")
+        {
             rigidbody.velocity = Vector3.up;
+        }
+        shouldSignOperate = true;
+        if (Application.loadedLevelName == "level3")
+        {
+            rigidbody.velocity = Vector3.down;
+        }
+           
     }
     else
     {

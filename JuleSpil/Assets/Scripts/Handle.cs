@@ -28,9 +28,9 @@ public class Handle : MonoBehaviour
             renderer.material = toggleOn;
             if (!hasTogggled)
             {
-               
-                toggleId(id);
                 hasTogggled = true;
+                toggleId(id);
+                
             }
 
         }
