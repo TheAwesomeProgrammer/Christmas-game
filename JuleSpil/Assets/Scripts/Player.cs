@@ -109,7 +109,12 @@ public class Player : AttackScript {
             if (Application.loadedLevelName == "level2")
             {
                 GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) + mHealthBarScale.y/4f, (mHealthBarScale.x / 11f) * (life / 100), mHealthBarScale.y / 4f), "", mGuiLife);
-                GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) - mHealthBarScale.y /8f, (mHealthBarScale.x / 7f) * (rage / 100), mHealthBarScale.y / 4f), "", mGuiRage);
+                GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) - mHealthBarScale.y /1.3f, (mHealthBarScale.x / 9.5f) * (rage / 100), mHealthBarScale.y / 4f), "", mGuiRage);
+            }
+            if (Application.loadedLevelName == "level3")
+            {
+                GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) - mHealthBarScale.y / 10f, (mHealthBarScale.x / 11f) * (life / 100), mHealthBarScale.y / 22f), "", mGuiLife);
+                GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) - mHealthBarScale.y / 1.3f, (mHealthBarScale.x / 9.5f) * (rage / 100), mHealthBarScale.y / 4f), "", mGuiRage);
             }
 
 
