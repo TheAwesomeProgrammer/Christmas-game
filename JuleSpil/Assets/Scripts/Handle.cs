@@ -58,7 +58,7 @@ public class Handle : MonoBehaviour
             Toggle tToggle = gameObjToLookThrough.GetComponent<Toggle>();
             if (tToggle.id == id)
             {
-            
+                Debug.Log("TOGGLING");
                 tToggle.toggleId(id);
             }
         }

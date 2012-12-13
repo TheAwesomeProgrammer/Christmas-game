@@ -30,7 +30,7 @@ public class Player : AttackScript {
     public float horizontalMovement { get; set; }
 
     public GUIStyle mGuiLife;
-    public GUIStyle mGuiHelthBar;
+    public GUIStyle mGuiRage;
 
     private Enemy mEnemy;
 
@@ -82,7 +82,8 @@ public class Player : AttackScript {
     void OnGUI()
     {
       
-        GUI.Box(new Rect(0, 22, 185 * (life / 100), 8), "", mGuiLife);
+        GUI.Box(new Rect(0, 40, 333 * (life / 100), 8), "", mGuiLife);
+        GUI.Box(new Rect(0, 80, 380 * (rage / 100), 8), "", mGuiRage);
     }
    
 

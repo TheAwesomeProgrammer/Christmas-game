@@ -171,6 +171,7 @@
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Spikes.cs" />
      <Compile Include="Assets\Scripts\Switch.cs" />
+     <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\Toggle.cs" />
      <None Include="Assets\Orthello\Examples\0 - Simple Examples\TextSprites\lorem.txt" />
      <None Include="Assets\Orthello\Examples\0 - Simple Examples\(Unity Pro) NavMesh Pathfinding\read-me-navmesh.txt" />
