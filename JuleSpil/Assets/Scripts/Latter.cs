@@ -44,7 +44,7 @@ public class Latter : MonoBehaviour
         if (otherObject.tag == "Player")
         {
             Debug.Log("Exit");
-            if(id == 2)
+     
             otherObject.GetComponent<Player>().isLatter = false;
         }
     }

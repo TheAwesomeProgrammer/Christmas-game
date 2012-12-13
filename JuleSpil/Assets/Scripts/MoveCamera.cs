@@ -32,7 +32,6 @@ public class MoveCamera : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-        Screen.SetResolution(800, 600, true);
 	    speedEnum = Speed.faster;
         startSpeed = speed;
 	    startVector = transform.position;

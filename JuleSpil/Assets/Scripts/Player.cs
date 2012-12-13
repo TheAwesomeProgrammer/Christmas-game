@@ -42,29 +42,40 @@ public class Player : AttackScript {
 
     private float startJumping;
     private float lastLife;
+     
+
+    private Vector3 mHealthBarPosition;
+    private Vector3 mHealthBarScale;
+
+    private bool hasScreenChangedOrIsStart = true;
+
+    private DrawLifeAndRage drawLifeAndRage;
+
    
 
-  //  private DrawLifeAndRage drawLifeAndRage;
+
 
 	// Use this for initialization
 	void Start ()
 	{
-        Screen.SetResolution(800, 600, true);
-	 //   drawLifeAndRage = GameObject.Find("DrawLifeAndRage").GetComponent<DrawLifeAndRage>();
+        
+      //  Screen.SetResolution(1600, 900, true);
+	    drawLifeAndRage = GameObject.Find("DrawLifeAndRage").GetComponent<DrawLifeAndRage>();
 	    life = MAXLIFE;
 	    lastLife = 0;
         mAnimation = GetComponent<AnimationPlayer>();
         isLatter = false;
 	    startVector = transform.position;
 	    startJumping = jumpSpeed;
-	}
-
+        healthBar = GameObject.Find("HealthBar").transform;
+      
+    }
    
     void Update()
     {
-    //    healthBar = GameObject.Find("HealthBar").transform;
+     
+      
         mtarget = GameObject.FindGameObjectsWithTag("Enemy");
-       
         if (mtarget.Length > 0)
         {
             mEnemy =  findTarget("Enemy").GetComponent<Enemy>();
@@ -73,17 +84,36 @@ public class Player : AttackScript {
         }
         attack(); 
         move();
-            isDead();
+        isDead();
+
+        if (hasScreenChangedOrIsStart && Time.time > 0.6f)
+        {
+            hasScreenChangedOrIsStart = false;
+            mHealthBarPosition = Camera.mainCamera.WorldToScreenPoint(healthBar.position);
+            mHealthBarScale = Camera.mainCamera.WorldToScreenPoint(healthBar.lossyScale);
+        }
  
         hasEnemySeenYou = false;
+   
         
     }
 
     void OnGUI()
     {
-      
-        GUI.Box(new Rect(0, 40, 333 * (life / 100), 8), "", mGuiLife);
-        GUI.Box(new Rect(0, 80, 380 * (rage / 100), 8), "", mGuiRage);
+        rage = 50;
+        if (Application.loadedLevelName == "level1")
+        {
+            GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) - mHealthBarScale.y / 7.5f, (mHealthBarScale.x / 8.25f) * (life / 100), mHealthBarScale.y / 14f), "", mGuiLife);
+            GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) + mHealthBarScale.y / 7.5f, (mHealthBarScale.x / 7f) * (rage / 100), mHealthBarScale.y / 14f), "", mGuiRage);
+        }
+            if (Application.loadedLevelName == "level2")
+            {
+                GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) + mHealthBarScale.y/4f, (mHealthBarScale.x / 11f) * (life / 100), mHealthBarScale.y / 4f), "", mGuiLife);
+                GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) - mHealthBarScale.y /8f, (mHealthBarScale.x / 7f) * (rage / 100), mHealthBarScale.y / 4f), "", mGuiRage);
+            }
+
+
+       
     }
    
 
@@ -138,7 +168,7 @@ public class Player : AttackScript {
         CharacterController controller = GetComponent<CharacterController>();
       
         horizontalMovement = Input.GetAxis("Horizontal");
-
+        
         if (jumping)
         {
             horizontalMovement /= 1.5f;
@@ -152,7 +182,7 @@ public class Player : AttackScript {
        if(!isLatter)
        {
            moveDirection = new Vector3(horizontalMovement*speed * Time.deltaTime, 0, 0);
-           Debug.Log("Movement latter : " + horizontalMovement * speed * Time.deltaTime);
+           
        }
      
         moveDirection = transform.TransformDirection(moveDirection);
@@ -198,10 +228,7 @@ public class Player : AttackScript {
             takeDamage(100);
         }
         Debug.Log("hit name : " + hit.collider.name);
-        if (hit.collider.name == "Glow")
-        {
-            takeDamage(100);
-        }
+  
         if (hit.collider.tag == "FallingIceCube")
         {
             FallingIceCubes tfallingIceCube = hit.collider.GetComponent<FallingIceCubes>();

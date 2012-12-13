@@ -13,7 +13,7 @@ public class Elevator : MonoBehaviour
     private bool shouldSignOperate;
 
     private Vector3 startVector;
-    private Vector3 endVector = new Vector3(68.69097f, 6.272288f, 13.53933f);
+    public Vector3 endVector { get; set; }
 
     private GameObject sign;
 
@@ -22,6 +22,15 @@ public class Elevator : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+        if (Application.loadedLevelName == "level1")
+        {
+            endVector = new Vector3(66.72536f, 4.054714f, 1f);
+        }
+        if (Application.loadedLevelName == "level3")
+        {
+            endVector = new Vector3(-8.251297f, -38.74735f, -8.067272f);
+        }
+       
 	    playerIsOnElevator = false;
 	    shouldOperate = false;
 	}
@@ -30,7 +39,7 @@ public class Elevator : MonoBehaviour
 	void Update ()
 	{
 	 
-        if (Mathf.Abs(transform.position.y - endVector.y) < 2.2f)
+        if (Mathf.Abs(transform.position.y - endVector.y) < 0.1f)
         {
             rigidbody.velocity = Vector3.zero;
             shouldOperate = false;
