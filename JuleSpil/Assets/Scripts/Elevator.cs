@@ -7,6 +7,7 @@ public class Elevator : MonoBehaviour
     public Material redSign;
 
     public float speed;
+    public float length = 5;
 
     public bool shouldOperate { get; set; }
 
@@ -17,21 +18,11 @@ public class Elevator : MonoBehaviour
 
     private GameObject sign;
 
-    public bool playerIsOnElevator { get; set; }
-
+    
 	// Use this for initialization
 	void Start ()
 	{
-        if (Application.loadedLevelName == "level1")
-        {
-            endVector = new Vector3(66.72536f, 4.054714f, 1f);
-        }
-        if (Application.loadedLevelName == "level3")
-        {
-            endVector = new Vector3(17.46829f, -51.78516f, -2.689121f);
-        }
-       
-	    playerIsOnElevator = false;
+	    endVector = new Vector3(transform.position.x, transform.position.y + length, transform.position.z);
 	    shouldOperate = false;
 	}
 	
@@ -44,6 +35,7 @@ public class Elevator : MonoBehaviour
             rigidbody.velocity = Vector3.zero;
             shouldOperate = false;
         }
+
         if (shouldSignOperate)
         {
             GameObject.Find("Sign").renderer.material = greenSign;
@@ -52,15 +44,15 @@ public class Elevator : MonoBehaviour
         {
             GameObject.Find("Sign").renderer.material = redSign;
         }
+
     if(shouldOperate)
     {
         shouldSignOperate = true;
-        if (Application.loadedLevelName == "level1")
+        if (endVector.y > transform.position.y)
         {
-            rigidbody.velocity = Vector3.up;
+             rigidbody.velocity = Vector3.up;
         }
-        shouldSignOperate = true;
-        if (Application.loadedLevelName == "level3")
+        else if (endVector.y < transform.position.y)
         {
             rigidbody.velocity = Vector3.down;
         }

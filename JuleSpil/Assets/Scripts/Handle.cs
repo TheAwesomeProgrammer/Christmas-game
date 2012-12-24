@@ -59,7 +59,7 @@ public class Handle : MonoBehaviour
             if (tToggle.id == id)
             {
                 Debug.Log("TOGGLING");
-                tToggle.toggleId(id);
+                tToggle.toggle();
             }
         }
 

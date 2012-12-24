@@ -25,6 +25,10 @@ public class Goal : MonoBehaviour {
             {
                 Application.LoadLevel("level3");
             }
+            if (Application.loadedLevelName == "level3")
+            {
+                Application.LoadLevel("WinScreen");
+            }
         }
        
     }

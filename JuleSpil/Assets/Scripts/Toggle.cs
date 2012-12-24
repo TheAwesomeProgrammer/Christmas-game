@@ -1,9 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
+public enum toggleType
+{
+    Explosion,
+    Elevator,
+    NoType
+}
+
 public class Toggle : MonoBehaviour {
 
     public int id;
+    public toggleType mToggleType;
 
 	// Use this for initialization
 	void Start () {
@@ -14,9 +22,9 @@ public class Toggle : MonoBehaviour {
 	void Update () {
     
 	}
-    public void toggleId(int id)
+    public void toggle()
     {
-      if(id == 0 ||id == 1||id == 2)
+      if(mToggleType == toggleType.Explosion)
       {
 
                 if (GetComponent<Detonator>() != null )
@@ -28,11 +36,11 @@ public class Toggle : MonoBehaviour {
                 }
       }
             
-          
-            if(id == 10)
-            {
+         
+    if(mToggleType == toggleType.Elevator)
+      {
             GameObject.Find("Elevator").GetComponent<Elevator>().shouldOperate = true;
-            }
+      }
           
         
     }
