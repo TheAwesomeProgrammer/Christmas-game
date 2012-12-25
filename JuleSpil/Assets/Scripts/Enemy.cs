@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public float attackInterval = 1.5f;
     public float mHowMuchToSlowPlayer = 3;
 
-
+    public GameObject rage;
     public GameObject health;
 
     protected float closesYouCanBeToTarget;
@@ -102,6 +102,13 @@ public class Enemy : MonoBehaviour
 
    public void takeDamage(float damage)
    {
+
+       float tSpeedToLoseLifeWith = 15f;
+       if(player.rage < 50)
+       {
+           rage.transform.Translate(Vector3.right * Time.deltaTime * tSpeedToLoseLifeWith);
+       }
+   
        life -= damage;
       
    }

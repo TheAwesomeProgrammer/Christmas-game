@@ -73,8 +73,7 @@ public class Player : AttackScript {
    
     void Update()
     {
-     
-      
+        
         mtarget = GameObject.FindGameObjectsWithTag("Enemy");
         if (mtarget.Length > 0)
         {
@@ -91,40 +90,14 @@ public class Player : AttackScript {
             hasScreenChangedOrIsStart = false;
             mHealthBarPosition = Camera.mainCamera.WorldToScreenPoint(healthBar.position);
             mHealthBarScale = Camera.mainCamera.WorldToScreenPoint(healthBar.lossyScale);
+            
         }
- 
         hasEnemySeenYou = false;
-   
-        
+      
     }
 
-    void OnGUI()
-    {
-        rage = 50;
-        if (Application.loadedLevelName == "level1")
-        {
-            GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) - mHealthBarScale.y / 7.5f, (mHealthBarScale.x / 8.25f) * (life / 100), mHealthBarScale.y / 14f), "", mGuiLife);
-            GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) + mHealthBarScale.y / 7.5f, (mHealthBarScale.x / 7f) * (rage / 100), mHealthBarScale.y / 14f), "", mGuiRage);
-        }
-            if (Application.loadedLevelName == "level2")
-            {
-                GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) + mHealthBarScale.y/4f, (mHealthBarScale.x / 11f) * (life / 100), mHealthBarScale.y / 4f), "", mGuiLife);
-                GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) - mHealthBarScale.y /1.3f, (mHealthBarScale.x / 9.5f) * (rage / 100), mHealthBarScale.y / 4f), "", mGuiRage);
-            }
-            if (Application.loadedLevelName == "level3")
-            {
-                GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) - mHealthBarScale.y / 12f, (mHealthBarScale.x / 7f) * (life / 100), mHealthBarScale.y / 25f), "", mGuiLife);
-                GUI.Box(new Rect(0, (Screen.height - mHealthBarPosition.y) + mHealthBarScale.y / 12f, (mHealthBarScale.x / 6f) * (rage / 100), mHealthBarScale.y / 25f), "", mGuiRage);
-            }
-
-
-       
-    }
    
-
-
-        
-    
+   
 
     public GameObject findTarget(string tag)
     {
@@ -148,6 +121,8 @@ public class Player : AttackScript {
 
     public void takeDamage(float damage)
     {
+        float tSpeedToLoseLifeWith = 15f * (damage / 5); ;
+        health.transform.Translate(Vector3.left * Time.deltaTime * tSpeedToLoseLifeWith);
         life -= damage;
         
     }

@@ -75,6 +75,7 @@
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Spikes.cs" />
      <Compile Include="Assets\Scripts\Switch.cs" />
+     <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\Toggle.cs" />
      <Compile Include="Assets\Scripts\WinText.cs" />
      <Compile Include="Assets\iTween\Plugins\iTween.cs" />
